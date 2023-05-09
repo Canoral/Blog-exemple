@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
+
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Posts from "../Posts/Posts";
@@ -36,16 +38,18 @@ function App() {
   }, []);
 
   return (
-    <div className={`App ${zenMode ? "zen-mode" : ""}`}>
-      <Header
-        categories={categories}
-        zenMode={zenMode}
-        setZenMode={setZenMode}
-      />
-      {loading ? <Spinner /> : <Posts posts={posts} />}
+    <BrowserRouter>
+      <div className={`App ${zenMode ? "zen-mode" : ""}`}>
+        <Header
+          categories={categories}
+          zenMode={zenMode}
+          setZenMode={setZenMode}
+        />
+        {loading ? <Spinner /> : <Posts posts={posts} />}
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
