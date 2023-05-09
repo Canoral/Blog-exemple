@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // On importe notre composant principal
 import App from "./components/App/App";
+import NotFound from "./components/NotFound/NotFound";
 // On importe notre fichier de style global
 import "./styles/index.scss";
 
@@ -10,7 +11,9 @@ import "./styles/index.scss";
 const router = createBrowserRouter([
   {
     path: "/", // quand l'URL correspond à `/`…
-    element: <h1>HW!</h1>, // …j'affiche l'élément `<h1>HW!</h1>`
+    // element: <h1>HW!</h1>, // …j'affiche l'élément `<h1>HW!</h1>`
+    element: <App />, // à la racine, on affiche la _Route root_
+    errorElement: <NotFound />,
   },
 ]);
 
@@ -20,5 +23,6 @@ const root = ReactDOM.createRoot(
 );
 
 // On injecte notre application dans le DOM
-// On diffuse les outils et les routes configurée (ci-dessous) de React Router dans l'application
+// On diffuse les outils et les routes configurées (ci-dessus)
+// de React Router dans l'application
 root.render(<RouterProvider router={router} />);

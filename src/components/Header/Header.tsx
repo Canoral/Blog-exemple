@@ -1,33 +1,35 @@
 import "./Header.scss";
-import { Link } from "react-router-dom";
 
-import { HeaderProps } from "../../@interfaces/interfaces";
+export interface ICategory {
+  route: string;
+  label: string;
+}
+
+interface HeaderProps {
+  categories: ICategory[];
+  zenMode: boolean;
+  setZenMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 function Header({ categories, zenMode, setZenMode }: HeaderProps) {
-  const categoriesList = categories.map((category) => {
-    return (
-      <Link
-        key={category.label}
-        className="menu-link menu-link"
-        to={category.route}
-      >
-        {category.label}
-      </Link>
-    );
-  });
+  const listItems = categories.map((category) => (
+    // <a key={category.label} className="menu-link menu-link--selected" href="#header">
+    <a key={category.label} className="menu-link" href={category.route}>
+      {category.label}
+    </a>
+  ));
 
   return (
     <header className="menu" id="header">
       <nav className="menu-nav">
-        {categoriesList}
+        {listItems}
+
         <button
           className="menu-btn"
           type="button"
-          onClick={() => {
-            setZenMode(!zenMode);
-          }}
+          onClick={() => setZenMode(!zenMode)}
         >
-          {zenMode ? "Désactiver le mode zen" : "Activer le mode zen"}
+          {zenMode ? "Désactiver" : "Activer"} le mode zen
         </button>
       </nav>
     </header>
